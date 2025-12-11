@@ -1,18 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FiveSite • Home</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-<p>
-    hello welcome to the web page
-</p>
-<button text="submit">
-
-</button>
+<body id="home">
+  <header>
+    <div class="brand">FiveSite</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card">
+      <h1>Welcome to FiveSite</h1>
+      <p class="muted">Use the Sign Up page to create an account and Login to see your profile.</p>
+      <div class="actions">
+        <a class="btn" href="signup.html">Create account</a>
+        <a class="btn outline" href="login.html">Login</a>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Quick status</h2>
+      <div id="status" class="muted">Not signed in</div>
+    </section>
+  </main>
+  <footer>© FiveSite 2025</footer>
+  <script src="script.js"></script>
+  <script>
+    const current = getCurrentUser()
+    const status = document.getElementById('status')
+    status.textContent = current ? 'Signed in as ' + current.name + ' (' + current.email + ')' : 'Not signed in'
+  </script>
 </body>
 </html>

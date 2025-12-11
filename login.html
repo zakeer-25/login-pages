@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FiveSite • Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="loginPage">
+  <header>
+    <div class="brand">FiveSite</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html" class="active">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </nav>
+  </header>
+  <main>
+    <section class="card narrow">
+      <h1>Sign in</h1>
+      <form id="loginForm">
+        <input id="loginEmail" type="email" placeholder="Email address" required />
+        <input id="loginPassword" type="password" placeholder="Password" required />
+        <button type="submit" class="btn">Login</button>
+      </form>
+      <div id="loginResult" class="muted"></div>
+      <p class="muted">New here? <a href="signup.html">Create an account</a></p>
+      <div style="margin-top:12px">
+        <button id="logoutBtn" class="btn outline" style="display:none">Sign out</button>
+      </div>
+    </section>
+    <section class="card" id="profile" hidden>
+      <h2>Your profile</h2>
+      <div id="profileInfo" class="muted"></div>
+    </section>
+  </main>
+  <footer>© FiveSite 2025</footer>
+  <script src="script.js"></script>
+  <script>
+    const loginResult = document.getElementById('loginResult')
+    const profile = document.getElementById('profile')
+    const profileInfo = document.getElementById('profileInfo')
+    const logoutBtn = document.getElementById('logoutBtn')
+    const current = getCurrentUser()
+    if(current){
+      profile.removeAttribute('hidden')
+      profileInfo.textContent = 'Signed in as ' + current.name + ' (' + current.email + ')'
+      logoutBtn.style.display = 'inline-block'
+      document.getElementById('loginForm').style.display = 'none'
+    }
+    document.getElementById('loginForm').addEventListener('submit', e=>{
+      e.preventDefault()
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase()
+      const password = document.getElementById('loginPassword').value
+      const res = loginUser({email,password})
+      if(res.success){ location.href = 'index.html' } else { loginResult.textContent = res.message }
+    })
+    logoutBtn.addEventListener('click', ()=>{
+      signOut()
+      location.reload()
+    })
+  </script>
+</body>
+</html>
